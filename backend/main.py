@@ -32,7 +32,7 @@ def update_task(task_id):
     task = Task.query.get(task_id)
     
     if not task:
-        return jsonify({"message": "Task not found"}), 400
+        return jsonify({"message": "Task not found"}), 404
     
     data = request.json
     task.title = data.get("title", task.title)
@@ -42,7 +42,17 @@ def update_task(task_id):
     
     return jsonify({"message": "Task updated!"}), 200
 
-
+@app.route("/delete_task/<int:task_id>", methods=["DELETE"])
+def delete_task(task_id):
+    task = Task.query.get(task_id)
+    
+    if not task:
+        return jsonify({"message": "Task not found"}), 404
+    
+    db.session.delete(task)
+    db.session.commit()
+    
+    return jsonify({"message": "Task deleted!"}), 200
 
 
 if __name__ == "__main__":
