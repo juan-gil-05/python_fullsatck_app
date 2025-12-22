@@ -27,6 +27,23 @@ def create_task():
     
     return jsonify({"message": "Task created!"}), 201
 
+@app.route("/update_task/<int:task_id>", methods=["PATCH"])
+def update_task(task_id):
+    task = Task.query.get(task_id)
+    
+    if not task:
+        return jsonify({"message": "Task not found"}), 400
+    
+    data = request.json
+    task.title = data.get("title", task.title)
+    task.description = data.get("description", task.description)
+    
+    db.session.commit()
+    
+    return jsonify({"message": "Task updated!"}), 200
+
+
+
 
 if __name__ == "__main__":
     with app.app_context():
