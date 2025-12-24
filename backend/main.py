@@ -16,7 +16,7 @@ def create_task():
     description = request.json.get("description")
 
     if not title or not description:
-        return jsonify({"message": "Yous must include a title and a description"}), 400
+        return jsonify({"message": "Vous debez ajouter un titre et une déscription"}), 400
 
     new_task = Task(title=title, description=description)
     try:

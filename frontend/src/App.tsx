@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import TodoList from '../components/todoList'
+import CreateTaskForm from '../components/CreateTaskForm'
+import { Task } from '../types/Task'
 
 function App() {
 
-  const [tasks, setTasks] = useState(["test"])
+  const [tasks, setTasks] = useState<Task[]>([])
 
   useEffect(() => {
-    // fetchTasks()
+    fetchTasks()
   }, [])
 
   const fetchTasks = async () => {
@@ -19,6 +21,7 @@ function App() {
   return (
     <>
       <TodoList tasks={tasks} />
+      <CreateTaskForm />
     </>
   )
 }
