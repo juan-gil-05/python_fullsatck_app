@@ -21,7 +21,7 @@ function App() {
   return (
     <>
       <TodoList tasks={tasks} />
-      <CreateTaskForm />
+      <CreateTaskForm  />
     </>
   )
 }
